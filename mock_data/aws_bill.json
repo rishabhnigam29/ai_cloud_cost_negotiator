@@ -1,0 +1,307 @@
+{
+  "account_id": "123456789012",
+  "account_name": "grow360-production",
+  "billing_period": "2026-02-01 to 2026-02-28",
+  "currency": "USD",
+  "total_cost": 1847.63,
+  "services": [
+    {
+      "service": "Amazon EC2",
+      "total_cost": 892.40,
+      "region": "us-east-1",
+      "line_items": [
+        {
+          "description": "m5.xlarge On-Demand (api-server-1)",
+          "instance_id": "i-0a1b2c3d4e5f6a7b8",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.192,
+          "monthly_cost": 129.02,
+          "avg_cpu_utilization": 72.3,
+          "avg_memory_utilization": 68.1,
+          "tags": {"Name": "api-server-1", "Environment": "production"}
+        },
+        {
+          "description": "m5.xlarge On-Demand (api-server-2)",
+          "instance_id": "i-1b2c3d4e5f6a7b8c9",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.192,
+          "monthly_cost": 129.02,
+          "avg_cpu_utilization": 68.5,
+          "avg_memory_utilization": 61.2,
+          "tags": {"Name": "api-server-2", "Environment": "production"}
+        },
+        {
+          "description": "m5.2xlarge On-Demand (ml-training)",
+          "instance_id": "i-2c3d4e5f6a7b8c9d0",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.384,
+          "monthly_cost": 258.05,
+          "avg_cpu_utilization": 14.2,
+          "avg_memory_utilization": 11.8,
+          "tags": {"Name": "ml-training", "Environment": "production"},
+          "_savings_note": "WASTEFUL: runs 24/7 but only used ~3hrs/week for training jobs"
+        },
+        {
+          "description": "t3.large On-Demand (staging-server)",
+          "instance_id": "i-3d4e5f6a7b8c9d0e1",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.0832,
+          "monthly_cost": 55.91,
+          "avg_cpu_utilization": 2.1,
+          "avg_memory_utilization": 4.3,
+          "tags": {"Name": "staging-server", "Environment": "staging"},
+          "_savings_note": "ZOMBIE: staging server nobody uses anymore"
+        },
+        {
+          "description": "c5.xlarge On-Demand (batch-processor)",
+          "instance_id": "i-4e5f6a7b8c9d0e1f2",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.17,
+          "monthly_cost": 114.24,
+          "avg_cpu_utilization": 85.4,
+          "avg_memory_utilization": 42.1,
+          "tags": {"Name": "batch-processor", "Environment": "production"},
+          "_savings_note": "Good candidate for Reserved Instance — steady high usage"
+        },
+        {
+          "description": "r5.xlarge On-Demand (cache-server)",
+          "instance_id": "i-5f6a7b8c9d0e1f2a3",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.252,
+          "monthly_cost": 169.34,
+          "avg_cpu_utilization": 8.7,
+          "avg_memory_utilization": 22.4,
+          "tags": {"Name": "cache-server", "Environment": "production"},
+          "_savings_note": "OVERSIZED: barely uses memory, could downsize to r5.large"
+        },
+        {
+          "description": "GPU p3.2xlarge On-Demand (gpu-dev-box)",
+          "instance_id": "i-6a7b8c9d0e1f2a3b4",
+          "pricing_model": "on_demand",
+          "hours_running": 168,
+          "hourly_rate": 3.06,
+          "monthly_cost": 36.82,
+          "avg_cpu_utilization": 0.0,
+          "avg_memory_utilization": 0.0,
+          "tags": {"Name": "gpu-dev-box", "Environment": "dev"},
+          "_savings_note": "STOPPED but still has attached EBS volumes costing money"
+        }
+      ]
+    },
+    {
+      "service": "Amazon RDS",
+      "total_cost": 387.20,
+      "region": "us-east-1",
+      "line_items": [
+        {
+          "description": "db.r5.xlarge PostgreSQL Multi-AZ (prod-db)",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.48,
+          "monthly_cost": 322.56,
+          "avg_cpu_utilization": 45.2,
+          "storage_gb": 500,
+          "storage_used_gb": 127,
+          "tags": {"Name": "prod-db", "Environment": "production"},
+          "_savings_note": "RI candidate — steady usage. Also over-provisioned storage (500GB allocated, 127GB used)"
+        },
+        {
+          "description": "db.t3.medium PostgreSQL (dev-db)",
+          "pricing_model": "on_demand",
+          "hours_running": 672,
+          "hourly_rate": 0.068,
+          "monthly_cost": 45.70,
+          "avg_cpu_utilization": 3.1,
+          "storage_gb": 100,
+          "storage_used_gb": 8,
+          "tags": {"Name": "dev-db", "Environment": "dev"},
+          "_savings_note": "Runs 24/7 but dev team only works business hours"
+        },
+        {
+          "description": "Automated backups and snapshots",
+          "monthly_cost": 18.94,
+          "_savings_note": "14 manual snapshots older than 6 months — cleanup candidate"
+        }
+      ]
+    },
+    {
+      "service": "Amazon S3",
+      "total_cost": 186.43,
+      "region": "us-east-1",
+      "line_items": [
+        {
+          "description": "grow360-prod-assets (Standard)",
+          "storage_gb": 2400,
+          "monthly_cost": 55.20,
+          "access_pattern": "frequent",
+          "tags": {"Name": "prod-assets"}
+        },
+        {
+          "description": "grow360-logs (Standard)",
+          "storage_gb": 4200,
+          "monthly_cost": 96.60,
+          "access_pattern": "infrequent_after_7_days",
+          "last_accessed_breakdown": {
+            "last_7_days": "12%",
+            "8_to_30_days": "5%",
+            "31_to_90_days": "2%",
+            "over_90_days": "81%"
+          },
+          "tags": {"Name": "logs"},
+          "_savings_note": "HUGE WIN: 81% of data not accessed in 90+ days — move to Glacier or S3-IA"
+        },
+        {
+          "description": "grow360-ml-datasets (Standard)",
+          "storage_gb": 800,
+          "monthly_cost": 18.40,
+          "access_pattern": "rare",
+          "tags": {"Name": "ml-datasets"},
+          "_savings_note": "Rarely accessed — Glacier Deep Archive candidate"
+        },
+        {
+          "description": "Data transfer out",
+          "monthly_cost": 16.23
+        }
+      ]
+    },
+    {
+      "service": "Amazon EBS",
+      "total_cost": 124.80,
+      "region": "us-east-1",
+      "line_items": [
+        {
+          "description": "gp3 volumes (attached to running instances)",
+          "total_gb": 800,
+          "monthly_cost": 64.00
+        },
+        {
+          "description": "gp2 volumes (unattached / orphaned)",
+          "total_gb": 500,
+          "monthly_cost": 50.00,
+          "_savings_note": "ORPHANED: 500GB of unattached EBS volumes — delete immediately"
+        },
+        {
+          "description": "Snapshots",
+          "total_gb": 120,
+          "monthly_cost": 10.80,
+          "_savings_note": "Old snapshots from terminated instances"
+        }
+      ]
+    },
+    {
+      "service": "AWS Lambda",
+      "total_cost": 42.30,
+      "region": "us-east-1",
+      "line_items": [
+        {
+          "description": "image-resizer function",
+          "invocations": 2800000,
+          "avg_duration_ms": 450,
+          "memory_mb": 1024,
+          "monthly_cost": 31.50,
+          "_savings_note": "Over-provisioned memory — function only uses ~300MB, set to 512MB"
+        },
+        {
+          "description": "api-authorizer function",
+          "invocations": 5200000,
+          "avg_duration_ms": 12,
+          "memory_mb": 128,
+          "monthly_cost": 8.40
+        },
+        {
+          "description": "dead-letter-processor function",
+          "invocations": 0,
+          "monthly_cost": 0.00,
+          "_savings_note": "Zero invocations in 90 days — unused function"
+        },
+        {
+          "description": "legacy-webhook-handler function",
+          "invocations": 14,
+          "avg_duration_ms": 200,
+          "memory_mb": 512,
+          "monthly_cost": 2.40,
+          "_savings_note": "Nearly zero traffic — check if still needed"
+        }
+      ]
+    },
+    {
+      "service": "Elastic Load Balancing",
+      "total_cost": 78.50,
+      "region": "us-east-1",
+      "line_items": [
+        {
+          "description": "Application Load Balancer (prod-alb)",
+          "monthly_cost": 52.50,
+          "tags": {"Name": "prod-alb", "Environment": "production"}
+        },
+        {
+          "description": "Application Load Balancer (staging-alb)",
+          "monthly_cost": 26.00,
+          "tags": {"Name": "staging-alb", "Environment": "staging"},
+          "_savings_note": "Serving near-zero traffic — tied to zombie staging server"
+        }
+      ]
+    },
+    {
+      "service": "Amazon CloudWatch",
+      "total_cost": 54.20,
+      "line_items": [
+        {
+          "description": "Custom metrics and dashboards",
+          "monthly_cost": 32.40,
+          "_savings_note": "18 custom metrics — 7 haven't been viewed in 60+ days"
+        },
+        {
+          "description": "Log ingestion and storage",
+          "monthly_cost": 21.80
+        }
+      ]
+    },
+    {
+      "service": "Amazon NAT Gateway",
+      "total_cost": 48.30,
+      "line_items": [
+        {
+          "description": "NAT Gateway (us-east-1a)",
+          "monthly_cost": 32.40,
+          "data_processed_gb": 180
+        },
+        {
+          "description": "NAT Gateway (us-east-1b)",
+          "monthly_cost": 15.90,
+          "data_processed_gb": 45,
+          "_savings_note": "Low traffic — consider consolidating to single NAT Gateway"
+        }
+      ]
+    },
+    {
+      "service": "Other Services",
+      "total_cost": 33.50,
+      "line_items": [
+        {"description": "AWS Secrets Manager", "monthly_cost": 4.80},
+        {"description": "Amazon ECR", "monthly_cost": 8.20},
+        {"description": "AWS Config", "monthly_cost": 12.50},
+        {"description": "Amazon Route 53", "monthly_cost": 8.00}
+      ]
+    }
+  ],
+  "savings_summary_hidden": {
+    "_note": "This is NOT shown to the agent — it's for reference only",
+    "zombie_staging_infra": 81.91,
+    "ml_training_to_spot_or_scheduled": 206.44,
+    "s3_lifecycle_policies": 68.00,
+    "orphaned_ebs_volumes": 50.00,
+    "reserved_instances_ec2_rds": 109.00,
+    "right_sizing_cache_server": 42.00,
+    "lambda_memory_optimization": 10.00,
+    "old_snapshots_cleanup": 15.00,
+    "nat_gateway_consolidation": 15.90,
+    "approximate_total_monthly_savings": 398.25
+  }
+}
